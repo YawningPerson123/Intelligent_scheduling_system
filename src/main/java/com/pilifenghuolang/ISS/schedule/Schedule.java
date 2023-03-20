@@ -3,20 +3,56 @@ package com.pilifenghuolang.ISS.schedule;
 import com.pilifenghuolang.ISS.Stuff;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ScheduleStep2 {
+public class Schedule {
 
-    public ScheduleStep2() {
+
+    //传入开始时间+每小时人流量，返回一个排好的待填空的排班表
+    public static ArrayList<Time> schedulingStep1(String dayOfTheWeek, Integer shopStartTime, ArrayList<Integer> stuffNeedArr){
+
+        ArrayList<Time> scheduleArr=new ArrayList<Time>();
+
+        for(int i=0; i<stuffNeedArr.size(); i++){
+
+            int stuffHave=0;
+            int stuffNeed=stuffNeedArr.get(i);
+            int hour=shopStartTime+i;//需要员工数 对应的那个小时
+
+            for(Time time:scheduleArr){//把本小时已经存在的have记录下来
+                if((time.getStartTime() <= hour)&&(hour + 1 <= time.getEndTime())){
+                    stuffHave++;
+                }
+            }
+
+            if(stuffHave < stuffNeed){//如果已存在的不够
+                for(Time time:scheduleArr){//把能延长先延长一小时
+                    if((time.getEndTime()-time.getStartTime()<4) && (time.getEndTime()==hour)){
+                        time.setEndTime(time.getEndTime()+1);
+                        stuffHave++;
+                    }
+
+                    if(stuffHave == stuffNeed) break;
+                }
+                while(stuffHave < stuffNeed){//还不够的话那就加入新的time
+                    Time time=new Time(hour,hour+2,dayOfTheWeek);
+                    scheduleArr.add(time);
+                    stuffHave++;
+                }//直到够了为止
+            }
+
+        }
+
+        return scheduleArr;
     }
 
 
-    //输入排好的待填空的排班表+员工数组的成员变量进行赋值
-    public static Map<Time,Stuff> scheduling(ArrayList<Time> scheduleArr, ArrayList<Stuff> stuffArr){
 
-        Map<Time,Stuff> timeStuffMap=new LinkedHashMap<Time,Stuff>();//最终time和stuff的映射关系全放在这个map中
+    //输入排好的待填空的排班表+员工数组的成员变量进行赋值
+    public static LinkedHashMap<Time, Stuff> schedulingStep2(ArrayList<Time> scheduleArr, ArrayList<Stuff> stuffArr){
+
+        LinkedHashMap<Time,Stuff> timeStuffMap=new LinkedHashMap<Time,Stuff>();//最终time和stuff的映射关系全放在这个map中
 
         for(Time time:scheduleArr){//遍历待填入的时间段
 
@@ -52,11 +88,12 @@ public class ScheduleStep2 {
 
             stuff.addScheduleTime(time);//将该时间段time加入到个人的时间表中
 
-
+            //timeStuffMap在上面已经装配好了
 
         }
 
         return timeStuffMap;
 
     }
+
 }

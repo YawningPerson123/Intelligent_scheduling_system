@@ -1,10 +1,5 @@
 package com.pilifenghuolang.ISS;
 
-import com.pilifenghuolang.ISS.schedule.ScheduleStep1;
-import com.pilifenghuolang.ISS.schedule.Time;
-
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -59,5 +54,14 @@ public class Main {
 //        time1=new Time(5,8);
 //        time2=new Time(4,9);
 //        System.out.println(Time.timeOverlapNum(time1,time2));
+
+//        System.out.println(Math.ceil(4));
+//        System.out.println(Math.ceil(3.9));
+//        System.out.println((double)1/(double)2);
+
+
+
+
+
     }
 }
