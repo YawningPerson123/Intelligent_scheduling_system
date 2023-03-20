@@ -1,9 +1,12 @@
 package com.pilifenghuolang.ISS;
 
+import com.pilifenghuolang.ISS.schedule.CreateBasicData;
 import com.pilifenghuolang.ISS.schedule.ScheduleStep1;
 import com.pilifenghuolang.ISS.schedule.Time;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -59,5 +62,10 @@ public class Main {
 //        time1=new Time(5,8);
 //        time2=new Time(4,9);
 //        System.out.println(Time.timeOverlapNum(time1,time2));
+
+        List<Stuff> stuffList = CreateBasicData.createStuffList();
+        System.out.println(stuffList);
+        List<Double> timeList = CreateBasicData.createScheduleList();
+        System.out.println(timeList);
     }
 }

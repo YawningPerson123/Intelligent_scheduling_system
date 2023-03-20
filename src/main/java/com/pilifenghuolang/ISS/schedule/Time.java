@@ -7,6 +7,13 @@ public class Time {
 
     private Integer timeNum;//时间段的数值
 
+    public Time(Integer startTime, Integer endTime, String dayOfTheWeek, Integer timeNum) {
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.dayOfTheWeek = dayOfTheWeek;
+        this.timeNum = timeNum;
+    }
+
     public Integer getStartTime() {
         return startTime;
     }

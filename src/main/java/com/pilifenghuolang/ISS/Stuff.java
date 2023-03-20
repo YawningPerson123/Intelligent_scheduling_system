@@ -1,10 +1,12 @@
 package com.pilifenghuolang.ISS;
 
 import com.pilifenghuolang.ISS.schedule.Time;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+@Data
 public class Stuff {
 
     //用于展示的数据
