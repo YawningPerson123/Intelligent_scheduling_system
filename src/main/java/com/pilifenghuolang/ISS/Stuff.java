@@ -15,7 +15,6 @@ public class Stuff {
     private String telephone;//电话号码
     private String mail;//电子邮箱
     private String stores;//所属门店
-    private ArrayList<Integer> preferenceArr;//描述偏好的数组，0-6是周一到周日，7-18是早九到晚九，19到30是早十到晚十，31是日工作最长时间，32是周最长工作时间
     private LinkedHashMap<Integer,ArrayList<Time>> preferenceMap;//0对应的是星期几的偏好数组，1代表的是时间段的偏好数组，2代表的是日最长工作时间，3代表的是周工作最长时间
 
     private ArrayList<Time> personalSchedule;//用于存放个人的排班时间段
@@ -86,6 +85,11 @@ public class Stuff {
 
         personalSchedule.add(time);
 
+    }
+
+
+    public void setPersonalDayWorkingHoursReturnToZero(){
+        personalWorkingHours.set(0,0);
     }
 
 }
