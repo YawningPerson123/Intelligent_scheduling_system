@@ -13,7 +13,7 @@ public class Store {
     private String address;//店的地址
 
     //用于计算的数据
-    private Double size;//店的面积
+    private Double size=200.0;//店的面积
 
     private Double preDivisorValue=100.0;//开店前准备除数的权值
 
@@ -38,6 +38,13 @@ public class Store {
         this.address = address;
     }
 
+    public void addStuff(Stuff stuff){
+        stuffArr.add(stuff);
+    }
+
+    public void setStuffArr(ArrayList<Stuff> stuffArr) {
+        this.stuffArr = stuffArr;
+    }
 
     //设置店的面积
     public void setSize(Double size) {

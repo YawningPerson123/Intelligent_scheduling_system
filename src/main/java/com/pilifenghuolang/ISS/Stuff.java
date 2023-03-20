@@ -17,10 +17,14 @@ public class Stuff {
     private String stores;//所属门店
     private LinkedHashMap<Integer,ArrayList<Time>> preferenceMap;//0对应的是星期几的偏好数组，1代表的是时间段的偏好数组，2代表的是日最长工作时间，3代表的是周工作最长时间
 
-    private ArrayList<Time> personalSchedule;//用于存放个人的排班时间段
-    private ArrayList<Integer> personalWorkingHours;//0代表日工作时间，1代表周工作时间
-    private ArrayList<Time> personalRestTime;//用于存放休息的时间段
+    private ArrayList<Time> personalSchedule=new ArrayList<>();//用于存放个人的排班时间段
+    private ArrayList<Integer> personalWorkingHours=new ArrayList<>();//0代表日工作时间，1代表周工作时间
+    private ArrayList<Time> personalRestTime=new ArrayList<>();//用于存放休息的时间段
 
+    public Stuff() {
+        personalWorkingHours.add(0);
+        personalWorkingHours.add(0);
+    }
 
     //加入i小时之后，是否造成超过日上限或周上限
     public boolean isOverTime(Time time){

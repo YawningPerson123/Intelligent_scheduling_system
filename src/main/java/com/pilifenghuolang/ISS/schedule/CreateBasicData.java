@@ -2,12 +2,11 @@ package com.pilifenghuolang.ISS.schedule;
 
 import com.pilifenghuolang.ISS.Stuff;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class CreateBasicData {
     // 创建20个员工对象，每个员工职位和偏好均不同
-    public static ArrayList<Stuff> createStuffList(){
+    public static ArrayList<Stuff> createStuffArr(){
         ArrayList<Stuff> stuffList = new ArrayList<>();
         for(int i = 1; i <= 20; i++){
             Stuff stuff = new Stuff();
@@ -374,15 +373,26 @@ public class CreateBasicData {
         }
         return stuffList;
     }
-    //根据原始数据创建随机的一日客流量
-    public static List<Double> createScheduleList(){
-        ArrayList<Double> list = new ArrayList<>();
-        Random r = new Random();
-        double[] originList = {0,0.1,1.3,5.7,11.1,13.4,13.3,17.3,18.1,22.8,16.9,21.6,18.3,17.2,15.3,14.3,11.6,8.3,8.3,7.2,5.6,5.6,2.5,2.1,0.1,0.1};
-        for (int i = 0; i < originList.length; i++){
-            originList[i] += originList[i] * 0.2 * (r.nextDouble() - 0.5) * 2;
-            list.add(Math.round(originList[i] * 10) / 10.0);
+    //根据原始数据创建随机的一周客流量
+    public static LinkedHashMap<String,ArrayList<Double>> passFlowNumWeekMap(){
+
+        LinkedHashMap<String,ArrayList<Double>> passFlowNumWeekMap=new LinkedHashMap<String,ArrayList<Double>>();
+
+        for(int dayOfTheWeek=1; dayOfTheWeek<=7; dayOfTheWeek++){
+
+            Integer weekValue=1;
+            if(dayOfTheWeek==6||dayOfTheWeek==7) weekValue=2;
+
+            ArrayList<Double> passFlowNumArr = new ArrayList<>();
+            Random r = new Random();
+            double[] originList = {0,0.1,1.3,5.7,11.1,13.4,13.3,17.3,18.1,22.8,16.9,21.6,18.3,17.2,15.3,14.3,11.6,8.3,8.3,7.2,5.6,5.6,2.5,2.1,0.1,0.1};
+            for (int i = 0; i < originList.length; i++){
+                originList[i] += originList[i] * 0.2 * (r.nextDouble() - 0.5) * 2 *weekValue;
+                passFlowNumArr.add(Math.round(originList[i] * 10) / 10.0);
+                passFlowNumWeekMap.put(new String(String.valueOf(dayOfTheWeek)) , passFlowNumArr);
+            }
         }
-        return list;
+
+        return passFlowNumWeekMap;
     }
 }

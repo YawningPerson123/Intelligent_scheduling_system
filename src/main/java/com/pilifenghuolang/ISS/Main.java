@@ -1,5 +1,10 @@
 package com.pilifenghuolang.ISS;
 
+import com.pilifenghuolang.ISS.schedule.CreateBasicData;
+import com.pilifenghuolang.ISS.schedule.Time;
+
+import java.util.LinkedHashMap;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -55,6 +60,16 @@ public class Main {
 //        time2=new Time(4,9);
 //        System.out.println(Time.timeOverlapNum(time1,time2));
 
+        Store store=new Store();
+        store.setStuffArr(CreateBasicData.createStuffArr());
+        LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(CreateBasicData.passFlowNumWeekMap());
 
+
+        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
+            System.out.println("zhou"+dayOfTheWeek);
+            for(Time time : timeStuffWeekMap.get(dayOfTheWeek).keySet()){
+                System.out.print(time + ":" + timeStuffWeekMap.get(dayOfTheWeek).get(time));
+            }
+        }
     }
 }
