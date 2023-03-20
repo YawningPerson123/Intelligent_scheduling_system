@@ -55,13 +55,6 @@ public class Main {
 //        time2=new Time(4,9);
 //        System.out.println(Time.timeOverlapNum(time1,time2));
 
-//        System.out.println(Math.ceil(4));
-//        System.out.println(Math.ceil(3.9));
-//        System.out.println((double)1/(double)2);
-
-
-
-
 
     }
 }
