@@ -41,14 +41,10 @@ public class Time {
     //如果有头时间和尾时间，则相减之后在返回
     //如果是单纯设置时间大小的，则直接返回
     public Integer getTimeNum() {
-        if(this.getStartTime()!=null&&this.getEndTime()!=null){
+        if(this.getStartTime()!=null&&this.getStartTime()!=0&&this.getEndTime()!=null&&this.getEndTime()!=0){
             timeNum=this.getEndTime()-this.getStartTime();
         }
         return timeNum;
-    }
-
-    public void setTimeNum(Integer timeNum) {
-        this.timeNum = timeNum;
     }
 
 
@@ -59,9 +55,6 @@ public class Time {
         this.dayOfTheWeek = dayOfTheWeek;
     }
 
-    public Time(Integer timeNum) {
-        this.timeNum = timeNum;
-    }
 
     public Time(Integer startTime, Integer endTime) {
         this.startTime = startTime;
@@ -77,7 +70,7 @@ public class Time {
     //判断两个time的星期几是否相等
     public static boolean isDayOfTheWeekEqual(Time time1,Time time2){
         boolean flag=true;
-        if(time1.getDayOfTheWeek()!=time2.getDayOfTheWeek()) flag=false;
+        if(!time1.getDayOfTheWeek().equals(time2.getDayOfTheWeek())) flag=false;
 
         return flag;
     }
@@ -143,8 +136,10 @@ public class Time {
     @Override
     public String toString() {
         return "Time{" +
-                "startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
+                "startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", dayOfTheWeek='" + dayOfTheWeek + '\'' +
+                ", timeNum=" + timeNum +
                 '}';
     }
 }

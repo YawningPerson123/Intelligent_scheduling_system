@@ -76,22 +76,33 @@ public class Store {
 
 
     //从外部输入一周的人流量，调用Store自身的数据，返回一周的员工需求数Map
-    private LinkedHashMap<String,ArrayList<Integer>> getStuffNeedWeekArr(LinkedHashMap<String,ArrayList<Double>> passFlowNumWeekMap){
+    public LinkedHashMap<String,ArrayList<Integer>> getStuffNeedWeekArr(LinkedHashMap<String,ArrayList<Double>> passFlowNumWeekMap){
 
-        LinkedHashMap<String,ArrayList<Integer>> stuffNeedWeekMap=new LinkedHashMap<String,ArrayList<Integer>>();
+        LinkedHashMap<String,ArrayList<Integer>> stuffNeedWeekMap=new LinkedHashMap<>();
 
         for(String dayOfTheWeek : passFlowNumWeekMap.keySet()){
 
-            ArrayList<Integer> stuffNeedDayArr=new ArrayList<Integer>();//一天的员工需求数数组
+            ArrayList<Integer> stuffNeedDayArr=new ArrayList<>();//一天的员工需求数数组
 
             for(int i=0; i<prePrepareHourNum; i++){
                 stuffNeedDayArr.add((int)Math.ceil(size/preDivisorValue));//向上取整默认返回double，因此要转成int
             }
+            int count=1;
+            double hourPassFlowNum=0;
             for(Double passFlowNum : passFlowNumWeekMap.get(dayOfTheWeek)){
-                if(passFlowNum==0){
-                    stuffNeedDayArr.add(freePopulationNum);//客流量为0，就设置freePopulationNum个店员
+                if(count%2==1){
+                    hourPassFlowNum+=passFlowNum;
+                    count++;
                 }else{
-                    stuffNeedDayArr.add((int)Math.ceil(passFlowNum/passFlowDivisorValue));
+                    hourPassFlowNum+=passFlowNum;
+                    hourPassFlowNum/=2.0;
+                    if(hourPassFlowNum==0){
+                        stuffNeedDayArr.add(freePopulationNum);//客流量为0，就设置freePopulationNum个店员
+                    }else{
+                        stuffNeedDayArr.add((int)Math.ceil(hourPassFlowNum/passFlowDivisorValue));
+                    }
+                    hourPassFlowNum=0;
+                    count++;
                 }
             }
             for(int i=0; i<aftPrepareHourNum; i++){
@@ -108,10 +119,10 @@ public class Store {
 
 
     //输入1~7字符，配合prePrepareHourNum，返回shopStartTime
-    private Integer getShopStartTime(String dayOfTheWeek){
+    public Integer getShopStartTime(String dayOfTheWeek){
 
         Integer shopStartTime=0;
-        if(dayOfTheWeek=="6" || dayOfTheWeek=="7"){
+        if(dayOfTheWeek.equals("6") || dayOfTheWeek.equals("7")){
             shopStartTime=10-prePrepareHourNum;//周末是10点开始正式工作
         }else{
             shopStartTime=9-prePrepareHourNum;//非周末是9点开始正式工作
@@ -137,14 +148,14 @@ public class Store {
         LinkedHashMap<String,ArrayList<Integer>> stuffNeedWeekMap=this.getStuffNeedWeekArr(passFlowNumWeekMap);
 
         //根据dayOfTheWeek和店的prePrepareHourNum获得shopStartTime，然后进行一天的排班并add进scheduleWeekMap
-        LinkedHashMap<String,ArrayList<Time>> scheduleWeekMap=new LinkedHashMap<String,ArrayList<Time>>();
+        LinkedHashMap<String,ArrayList<Time>> scheduleWeekMap=new LinkedHashMap<>();
         for(String dayOfTheWeek : stuffNeedWeekMap.keySet()){
             Integer shopStartTime=this.getShopStartTime(dayOfTheWeek);
             ArrayList<Time> scheduleArr= Schedule.schedulingStep1(dayOfTheWeek, shopStartTime,  stuffNeedWeekMap.get(dayOfTheWeek));
             scheduleWeekMap.put(dayOfTheWeek,scheduleArr);
         }
 
-        LinkedHashMap<String,LinkedHashMap<Time, Stuff>> timeStuffWeekMap=new LinkedHashMap<String,LinkedHashMap<Time, Stuff>>();
+        LinkedHashMap<String,LinkedHashMap<Time, Stuff>> timeStuffWeekMap=new LinkedHashMap<>();
         for(String dayOfTheWeek : scheduleWeekMap.keySet()){
             LinkedHashMap<Time, Stuff> timeStuffMap=Schedule.schedulingStep2(scheduleWeekMap.get(dayOfTheWeek),this.stuffArr);
             timeStuffWeekMap.put(dayOfTheWeek,timeStuffMap);
@@ -152,6 +163,12 @@ public class Store {
         }
 
         return timeStuffWeekMap;
+    }
+
+    public void showStuffArrSchedule(){
+        for(Stuff stuff:stuffArr){
+            stuff.showPersonalSchedule();
+        }
     }
 
 }

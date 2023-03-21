@@ -1,8 +1,10 @@
 package com.pilifenghuolang.ISS;
 
 import com.pilifenghuolang.ISS.schedule.CreateBasicData;
+import com.pilifenghuolang.ISS.schedule.Schedule;
 import com.pilifenghuolang.ISS.schedule.Time;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class Main {
@@ -63,13 +65,36 @@ public class Main {
         Store store=new Store();
         store.setStuffArr(CreateBasicData.createStuffArr());
         LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(CreateBasicData.passFlowNumWeekMap());
+        store.showStuffArrSchedule();
+//
+//        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
+//            System.out.println("zhou"+dayOfTheWeek);
+//            for(Time time : timeStuffWeekMap.get(dayOfTheWeek).keySet()){
+//                System.out.print(time + ":" + timeStuffWeekMap.get(dayOfTheWeek).get(time));
+//            }
+//        }
+//
+//        System.out.println(timeStuffWeekMap);
+
+        //System.out.println(CreateBasicData.createStuffArr());
+//
+//        System.out.println(CreateBasicData.passFlowNumWeekMap());
 
 
-        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
-            System.out.println("zhou"+dayOfTheWeek);
-            for(Time time : timeStuffWeekMap.get(dayOfTheWeek).keySet()){
-                System.out.print(time + ":" + timeStuffWeekMap.get(dayOfTheWeek).get(time));
-            }
-        }
+        //输出1.客流量模拟
+        //2.员工需求量
+        //3.生成的空的排班表
+//        Store store=new Store();
+//        System.out.println(CreateBasicData.passFlowNumWeekMap());
+//        LinkedHashMap<String, ArrayList<Integer>> stuffNeedWeekArr=store.getStuffNeedWeekArr(CreateBasicData.passFlowNumWeekMap());
+//        System.out.println(stuffNeedWeekArr);
+//
+//        for(String dayOfTheWeek:stuffNeedWeekArr.keySet()){
+//            System.out.println(Schedule.schedulingStep1(dayOfTheWeek,store.getShopStartTime(dayOfTheWeek),stuffNeedWeekArr.get(dayOfTheWeek)));
+//        }
+
     }
+
+
+
 }

@@ -12,7 +12,7 @@ public class Schedule {
     //传入开始时间+每小时人流量，返回一个排好的待填空的排班表
     public static ArrayList<Time> schedulingStep1(String dayOfTheWeek, Integer shopStartTime, ArrayList<Integer> stuffNeedArr){
 
-        ArrayList<Time> scheduleArr=new ArrayList<Time>();
+        ArrayList<Time> scheduleArr=new ArrayList<>();
 
         for(int i=0; i<stuffNeedArr.size(); i++){
 
@@ -42,6 +42,16 @@ public class Schedule {
                 }//直到够了为止
             }
 
+            int count=0;
+            for(Time time : scheduleArr){
+                if(time.getEndTime()>24){
+                    int pushForwardNum=time.getEndTime()-24;
+                    Time replaceTime=new Time(time.getStartTime()-pushForwardNum,time.getEndTime()-pushForwardNum);
+                    scheduleArr.set(count,replaceTime);
+                }
+                count++;
+            }
+
         }
 
         return scheduleArr;
@@ -52,12 +62,13 @@ public class Schedule {
     //输入排好的待填空的排班表+员工数组的成员变量进行赋值
     public static LinkedHashMap<Time, Stuff> schedulingStep2(ArrayList<Time> scheduleArr, ArrayList<Stuff> stuffArr){
 
-        LinkedHashMap<Time,Stuff> timeStuffMap=new LinkedHashMap<Time,Stuff>();//最终time和stuff的映射关系全放在这个map中
+        LinkedHashMap<Time,Stuff> timeStuffMap=new LinkedHashMap<>();//最终time和stuff的映射关系全放在这个map中
 
         for(Time time:scheduleArr){//遍历待填入的时间段
 
             Integer preferenceMaxValue=-1; //只有大于等于0的才可以第一次被替换
             for(Stuff stuff:stuffArr){
+
                 Integer preferenceValue;
                 if(stuff.isOverTime(time)||stuff.isRestTime(time)){
                     preferenceValue=-1;
@@ -65,10 +76,12 @@ public class Schedule {
                     preferenceValue=stuff.getPreferenceValue(time);
                 }
 
+
                 if(preferenceValue > preferenceMaxValue){
                     timeStuffMap.put(time,stuff);
                     preferenceMaxValue=preferenceValue;
                 }
+
             }//选择完这个time对应的stuff之后，对stuff的status进行改变
             // 1.日工作时间和周工作时间进行更新
             // 2.如果是4小时或者覆盖午饭晚饭时间，则对休息时间进行更新
@@ -76,17 +89,25 @@ public class Schedule {
 
             Stuff stuff=timeStuffMap.get(time);
 
-            stuff.updateOfWorkingHours(time);//日/周工作时间更新
+            if(stuff!=null){
+                stuff.updateOfWorkingHours(time);//日/周工作时间更新
 
-            if(Time.isFourHourTime(time)){//判断是否要加入休息时间
-                stuff.addRestTime(time);
-            }else if(Time.isCoverLunchTime(time)){
-                stuff.addRestTime(time);
-            }else if (Time.isCoverDinnerTime(time)) {
-                stuff.addRestTime(time);
+                if(Time.isFourHourTime(time)){//判断是否要加入休息时间
+                    stuff.addRestTime(time);
+                }else if(Time.isCoverLunchTime(time)){
+                    stuff.addRestTime(time);
+                }else if (Time.isCoverDinnerTime(time)) {
+                    stuff.addRestTime(time);
+                }
+
+                stuff.addScheduleTime(time);//将该时间段time加入到个人的时间表中
+            }else{
+                stuff=new Stuff("待填入");
             }
 
-            stuff.addScheduleTime(time);//将该时间段time加入到个人的时间表中
+
+            System.out.println(stuff);
+
 
             //timeStuffMap在上面已经装配好了
 

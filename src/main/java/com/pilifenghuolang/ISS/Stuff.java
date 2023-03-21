@@ -15,35 +15,63 @@ public class Stuff {
     private String telephone;//电话号码
     private String mail;//电子邮箱
     private String stores;//所属门店
-    private LinkedHashMap<Integer,ArrayList<Time>> preferenceMap;//0对应的是星期几的偏好数组，1代表的是时间段的偏好数组，2代表的是日最长工作时间，3代表的是周工作最长时间
+    private LinkedHashMap<Integer,ArrayList<Time>> preferenceMap=new LinkedHashMap<>();//0对应的是星期几的偏好数组，1代表的是时间段的偏好数组，2代表的是日最长工作时间，3代表的是周工作最长时间
+    private Integer dayWorkingTimeUpperLimit=8;
+    private Integer weekWorkingTimeUpperLimit=40;
 
     private ArrayList<Time> personalSchedule=new ArrayList<>();//用于存放个人的排班时间段
-    private ArrayList<Integer> personalWorkingHours=new ArrayList<>();//0代表日工作时间，1代表周工作时间
+    //private ArrayList<Integer> personalWorkingHours=new ArrayList<>();//0代表日工作时间，1代表周工作时间
+    private LinkedHashMap<Integer,Integer> personalWorkingHours=new LinkedHashMap<>();//0代表日工作时间，1代表周工作时间
     private ArrayList<Time> personalRestTime=new ArrayList<>();//用于存放休息的时间段
 
-    public Stuff() {
-        personalWorkingHours.add(0);
-        personalWorkingHours.add(0);
+    public Stuff(String name) {
+        this.name=name;
+
+        personalWorkingHours.put(0,0);//日工作时间设置为0
+        personalWorkingHours.put(1,0);//周工作时间设置为0
+    }
+
+    public void setWorkingTimeUpperLimit(Integer dayWorkingTimeUpperLimit,Integer weekWorkingTimeUpperLimit){
+        this.dayWorkingTimeUpperLimit=dayWorkingTimeUpperLimit;
+        this.weekWorkingTimeUpperLimit=weekWorkingTimeUpperLimit;
+    }
+
+    public void setPreferenceMap(LinkedHashMap<Integer,ArrayList<Time>> preferenceMap){
+        this.preferenceMap=preferenceMap;
+    }
+    @Override
+    public String toString() {
+        return "Stuff{" +
+                "name='" + name + '\'' +
+                '}';
     }
 
     //加入i小时之后，是否造成超过日上限或周上限
     public boolean isOverTime(Time time){
-        boolean flag=true;
+        boolean flag=false;
         int hourNum=time.getTimeNum();
-        if(personalWorkingHours.get(0) + hourNum > preferenceMap.get(2).get(0).getTimeNum()
-        ||personalWorkingHours.get(1) + hourNum >preferenceMap.get(3).get(0).getTimeNum()){
-            flag=false;
+        if(personalWorkingHours.get(0) + hourNum > dayWorkingTimeUpperLimit
+        ||personalWorkingHours.get(1) + hourNum > weekWorkingTimeUpperLimit){
+            flag=true;
         }
+
+//        System.out.println(personalWorkingHours.get(0) + hourNum);
+//        System.out.println(dayWorkingTimeUpperLimit);
+//        System.out.println(personalWorkingHours.get(1) + hourNum);
+//        System.out.println(weekWorkingTimeUpperLimit);
+
         return flag;
     }
 
 
     //输入的time是否和personalRestTime的时间有重叠（星期几相同和时间段重叠才算）
     public boolean isRestTime(Time time){
-        boolean flag=true;
-        for(Time restTime:personalRestTime){
-            if(Time.isDayOfTheWeekEqual(time,restTime)&&Time.timeOverlapNum(time,restTime)>0){
-                flag=false;
+        boolean flag=false;
+        if(personalRestTime.size()!=0){
+            for(Time restTime:personalRestTime){
+                if(Time.isDayOfTheWeekEqual(time,restTime)&&Time.timeOverlapNum(time,restTime)>0){
+                    flag=true;
+                }
             }
         }
 
@@ -56,13 +84,17 @@ public class Stuff {
 
         //星期偏好如果存在，则weekPreferenceValue的值设置成2，如果不存在则默认为1
         Integer weekPreferenceValue=1;
-        for(Time weekPreferenceTime:preferenceMap.get(0)){
-            if(time.getDayOfTheWeek()==weekPreferenceTime.getDayOfTheWeek()) weekPreferenceValue=2;
+        if(preferenceMap.get(0)!=null){
+            for(Time weekPreferenceTime:preferenceMap.get(0)){
+                if(time.getDayOfTheWeek().equals(weekPreferenceTime.getDayOfTheWeek())) weekPreferenceValue=2;
+            }
         }
 
         Integer timeOverlapNumMax=0;
-        for(Time timePeriodPreference:preferenceMap.get(1)){
-            if(Time.timeOverlapNum(time,timePeriodPreference)>timeOverlapNumMax) timeOverlapNumMax=Time.timeOverlapNum(time,timePeriodPreference);
+        if(preferenceMap.get(1)!=null){
+            for(Time timePeriodPreference:preferenceMap.get(1)){
+                if(Time.timeOverlapNum(time,timePeriodPreference)>timeOverlapNumMax) timeOverlapNumMax=Time.timeOverlapNum(time,timePeriodPreference);
+            }
         }
 
         return weekPreferenceValue * timeOverlapNumMax;
@@ -71,8 +103,8 @@ public class Stuff {
     
     //输入一个time，对周工作时间和日工作时间进行更新
     public void updateOfWorkingHours(Time time){
-        personalWorkingHours.set(0,personalWorkingHours.get(0)+time.getTimeNum());
-        personalWorkingHours.set(1,personalWorkingHours.get(1)+time.getTimeNum());
+        personalWorkingHours.put(0,personalWorkingHours.get(0)+time.getTimeNum());
+        personalWorkingHours.put(1,personalWorkingHours.get(1)+time.getTimeNum());
     }
 
 
@@ -93,7 +125,16 @@ public class Stuff {
 
 
     public void setPersonalDayWorkingHoursReturnToZero(){
-        personalWorkingHours.set(0,0);
+        personalWorkingHours.put(0,0);
     }
 
+    public void showPersonalSchedule(){
+        if(personalSchedule!=null){
+            System.out.print(name+":");
+            for(Time time:personalSchedule){
+                System.out.print(time);
+            }
+            System.out.println();
+        }
+    }
 }
