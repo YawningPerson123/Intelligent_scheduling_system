@@ -67,7 +67,7 @@ public class Schedule {
 
         for(Time time:scheduleArr){//遍历待填入的时间段
 
-            System.out.println(time);
+//            System.out.println(time);
 
             Integer preferenceMaxValue=-1; //只有大于等于0的才可以第一次被替换
             int count=1;
@@ -84,11 +84,15 @@ public class Schedule {
                 }
 
                 if(preferenceValue == preferenceMaxValue && preferenceMaxValue!=-1){
-                    if(replaceProbability > r.nextDouble()){
+                    if(stuff.getPersonalWorkingHours().get(1) < timeStuffMap.get(time).getPersonalWorkingHours().get(1)){
                         timeStuffMap.put(time,stuff);
+                    }else if(stuff.getPersonalWorkingHours().get(1) == timeStuffMap.get(time).getPersonalWorkingHours().get(1)){
+                        if(replaceProbability > r.nextDouble()){
+                            timeStuffMap.put(time,stuff);
+                        }
+                        count++;
+                        replaceProbability = 1.0/(count+1);
                     }
-                    count++;
-                    replaceProbability = 1.0/(count+1);
                 }
 
                 if(preferenceValue > preferenceMaxValue){
@@ -123,7 +127,7 @@ public class Schedule {
             }
 
 
-            System.out.println(stuff);
+//            System.out.println(stuff);
 
 
             //timeStuffMap在上面已经装配好了

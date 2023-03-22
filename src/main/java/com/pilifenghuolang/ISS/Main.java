@@ -66,6 +66,10 @@ public class Main {
         store.setStuffArr(CreateBasicData.createStuffArr());
         LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(CreateBasicData.passFlowNumWeekMap());
         store.showStuffArrSchedule();
+        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
+            System.out.print("周" + dayOfTheWeek + "：");
+            System.out.println(timeStuffWeekMap.get(dayOfTheWeek));
+        }
 //
 //        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
 //            System.out.println("zhou"+dayOfTheWeek);

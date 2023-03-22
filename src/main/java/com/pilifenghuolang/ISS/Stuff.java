@@ -130,7 +130,8 @@ public class Stuff {
 
     public void showPersonalSchedule(){
         if(personalSchedule!=null){
-            System.out.print(name+":");
+            System.out.print(name+":  ");
+            System.out.print("personalWorkingHours:" + personalWorkingHours.get(1) +"  ");
             for(Time time:personalSchedule){
                 System.out.print(time);
             }
