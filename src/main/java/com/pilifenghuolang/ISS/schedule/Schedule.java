@@ -5,6 +5,7 @@ import com.pilifenghuolang.ISS.Stuff;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Schedule {
 
@@ -46,7 +47,7 @@ public class Schedule {
             for(Time time : scheduleArr){
                 if(time.getEndTime()>24){
                     int pushForwardNum=time.getEndTime()-24;
-                    Time replaceTime=new Time(time.getStartTime()-pushForwardNum,time.getEndTime()-pushForwardNum);
+                    Time replaceTime=new Time(time.getStartTime()-pushForwardNum,time.getEndTime()-pushForwardNum,dayOfTheWeek);
                     scheduleArr.set(count,replaceTime);
                 }
                 count++;
@@ -66,7 +67,13 @@ public class Schedule {
 
         for(Time time:scheduleArr){//遍历待填入的时间段
 
+            System.out.println(time);
+
             Integer preferenceMaxValue=-1; //只有大于等于0的才可以第一次被替换
+            int count=1;
+            double replaceProbability = 1.0/(count+1);
+            Random r = new Random();
+
             for(Stuff stuff:stuffArr){
 
                 Integer preferenceValue;
@@ -76,10 +83,20 @@ public class Schedule {
                     preferenceValue=stuff.getPreferenceValue(time);
                 }
 
+                if(preferenceValue == preferenceMaxValue && preferenceMaxValue!=-1){
+                    if(replaceProbability > r.nextDouble()){
+                        timeStuffMap.put(time,stuff);
+                    }
+                    count++;
+                    replaceProbability = 1.0/(count+1);
+                }
 
                 if(preferenceValue > preferenceMaxValue){
                     timeStuffMap.put(time,stuff);
                     preferenceMaxValue=preferenceValue;
+
+                    count=1;
+                    replaceProbability = 1.0/(count+1);
                 }
 
             }//选择完这个time对应的stuff之后，对stuff的status进行改变

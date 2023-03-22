@@ -61,7 +61,7 @@ public class CreateBasicData {
         Time time14=new Time(17,20);//喜欢晚上
         Time time15=new Time(12,22);//起床起不来
         Time time16=new Time(10,19);//晚上班，早下班
-        Time time17=new Time(7,17);//只想早下班
+        Time time17=new Time(8,17);//只想早下班
 
         ArrayList<Time> preference11=new ArrayList<>();
         preference11.add(time11);

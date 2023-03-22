@@ -139,7 +139,6 @@ public class Time {
                 "startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", dayOfTheWeek='" + dayOfTheWeek + '\'' +
-                ", timeNum=" + timeNum +
                 '}';
     }
 }
