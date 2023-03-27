@@ -31,7 +31,12 @@ public class CreateBasicData {
         preference03.add(time01);
         preference03.add(time03);
         preference03.add(time06);
-        preference03.add(time07);
+
+        ArrayList<Time> preference04=new ArrayList<>();//星期2457
+        preference04.add(time02);
+        preference04.add(time04);
+        preference04.add(time05);
+        preference04.add(time07);
 
 
         Time time11=new Time(8,12);
@@ -127,6 +132,30 @@ public class CreateBasicData {
         preferenceMap.put(1,preference14);
         stuff12.setPreferenceMap(preferenceMap);
 
+        Stuff stuff13=new Stuff("员工13");
+        preferenceMap=new LinkedHashMap<>();
+        preferenceMap.put(0,preference04);
+        preferenceMap.put(1,preference11);
+        stuff13.setPreferenceMap(preferenceMap);
+
+        Stuff stuff14=new Stuff("员工14");
+        preferenceMap=new LinkedHashMap<>();
+        preferenceMap.put(0,preference04);
+        preferenceMap.put(1,preference12);
+        stuff14.setPreferenceMap(preferenceMap);
+
+        Stuff stuff15=new Stuff("员工15");
+        preferenceMap=new LinkedHashMap<>();
+        preferenceMap.put(0,preference04);
+        preferenceMap.put(1,preference13);
+        stuff15.setPreferenceMap(preferenceMap);
+
+        Stuff stuff16=new Stuff("员工16");
+        preferenceMap=new LinkedHashMap<>();
+        preferenceMap.put(0,preference04);
+        preferenceMap.put(1,preference14);
+        stuff16.setPreferenceMap(preferenceMap);
+
 
         ArrayList<Stuff> stuffArr = new ArrayList<>();
         stuffArr.add(stuff1);
@@ -141,6 +170,10 @@ public class CreateBasicData {
         stuffArr.add(stuff10);
         stuffArr.add(stuff11);
         stuffArr.add(stuff12);
+        stuffArr.add(stuff13);
+        stuffArr.add(stuff14);
+//        stuffArr.add(stuff15);
+//        stuffArr.add(stuff16);
 
 
         return stuffArr;
