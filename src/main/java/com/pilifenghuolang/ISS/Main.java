@@ -1,7 +1,8 @@
 package com.pilifenghuolang.ISS;
 
+import com.pilifenghuolang.ISS.domain.Store;
+import com.pilifenghuolang.ISS.domain.Stuff;
 import com.pilifenghuolang.ISS.schedule.CreateBasicData;
-import com.pilifenghuolang.ISS.schedule.Schedule;
 import com.pilifenghuolang.ISS.schedule.Time;
 
 import java.util.ArrayList;
@@ -64,7 +65,9 @@ public class Main {
 
         Store store=new Store();
         store.setStuffArr(CreateBasicData.createStuffArr());
-        LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(CreateBasicData.passFlowNumWeekMap());
+        LinkedHashMap<String, ArrayList<Double>> passFlowNumWeekMap = CreateBasicData.passFlowNumWeekMap();
+        System.out.println(passFlowNumWeekMap);
+        LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(passFlowNumWeekMap);
         store.showStuffArrSchedule();
         for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
             System.out.print("周" + dayOfTheWeek + "：");

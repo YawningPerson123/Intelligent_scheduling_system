@@ -1,12 +1,18 @@
-package com.pilifenghuolang.ISS;
+package com.pilifenghuolang.ISS.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.pilifenghuolang.ISS.schedule.Schedule;
 import com.pilifenghuolang.ISS.schedule.Time;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+@TableName("store")
 public class Store {
+
+    //店的id
+    private Integer id;
 
     //用于展示的数据
     private String name;//店的名字
@@ -26,7 +32,7 @@ public class Store {
     private Integer aftPrepareHourNum=2;//关门之后需要做几小时准备工作
 
     private Double passFlowDivisorValue=3.8;//人流量对应店员数的除数权值
-
+    @TableField(exist = false)
     private ArrayList<Stuff> stuffArr;//存放员工
 
 

@@ -1,5 +1,6 @@
-package com.pilifenghuolang.ISS;
+package com.pilifenghuolang.ISS.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.pilifenghuolang.ISS.schedule.Time;
 import lombok.Data;
 
@@ -15,13 +16,19 @@ public class Stuff {
     private String telephone;//电话号码
     private String mail;//电子邮箱
     private String stores;//所属门店
+    @TableField(exist = false)
     private LinkedHashMap<Integer,ArrayList<Time>> preferenceMap=new LinkedHashMap<>();//0对应的是星期几的偏好数组，1代表的是时间段的偏好数组，2代表的是日最长工作时间，3代表的是周工作最长时间
+    @TableField(exist = false)
     private Integer dayWorkingTimeUpperLimit=8;
+    @TableField(exist = false)
     private Integer weekWorkingTimeUpperLimit=40;
 
+    @TableField(exist = false)
     private ArrayList<Time> personalSchedule=new ArrayList<>();//用于存放个人的排班时间段
     //private ArrayList<Integer> personalWorkingHours=new ArrayList<>();//0代表日工作时间，1代表周工作时间
+    @TableField(exist = false)
     private LinkedHashMap<Integer,Integer> personalWorkingHours=new LinkedHashMap<>();//0代表日工作时间，1代表周工作时间
+    @TableField(exist = false)
     private ArrayList<Time> personalRestTime=new ArrayList<>();//用于存放休息的时间段
 
     public Stuff(String name) {
