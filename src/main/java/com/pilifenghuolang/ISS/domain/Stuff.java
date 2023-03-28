@@ -9,7 +9,8 @@ import java.util.LinkedHashMap;
 
 @Data
 public class Stuff {
-
+    //数据库中用来查询的数据
+    private Integer id;
     //用于展示的数据
     private String name;//员工名字
     private String position;//职位
@@ -18,9 +19,7 @@ public class Stuff {
     private String stores;//所属门店
     @TableField(exist = false)
     private LinkedHashMap<Integer,ArrayList<Time>> preferenceMap=new LinkedHashMap<>();//0对应的是星期几的偏好数组，1代表的是时间段的偏好数组，2代表的是日最长工作时间，3代表的是周工作最长时间
-    @TableField(exist = false)
     private Integer dayWorkingTimeUpperLimit=8;
-    @TableField(exist = false)
     private Integer weekWorkingTimeUpperLimit=40;
 
     @TableField(exist = false)
