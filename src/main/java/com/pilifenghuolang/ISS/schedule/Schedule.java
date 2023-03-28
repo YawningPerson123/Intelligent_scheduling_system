@@ -84,6 +84,8 @@ public class Schedule {
 
                 if(preferenceValue == preferenceMaxValue && preferenceMaxValue!=-1){
                     if(stuff.getPersonalWorkingHours().get(1) < timeStuffMap.get(time).getPersonalWorkingHours().get(1)){
+                        count=1;
+                        replaceProbability = 1.0/(count+1);
                         timeStuffMap.put(time,stuff);
                     }else if(stuff.getPersonalWorkingHours().get(1) == timeStuffMap.get(time).getPersonalWorkingHours().get(1)){
                         if(replaceProbability > r.nextDouble()){
@@ -123,6 +125,7 @@ public class Schedule {
                 stuff.addScheduleTime(time);//将该时间段time加入到个人的时间表中
             }else{
                 stuff=new Stuff("待填入");
+                timeStuffMap.put(time,stuff);
             }
 
 
