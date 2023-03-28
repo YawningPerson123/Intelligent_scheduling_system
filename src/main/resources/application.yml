@@ -6,3 +6,10 @@ spring:
     url: jdbc:mysql://localhost:3306/iss_db?useSSL=false&serverTimezone=UTC
     username: root
     password: 1234
+mybatis-plus:
+  configuration:
+    # 开启mp的日志（输出到控制台）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    # 关闭mp的的控制台banner
+    banner: false

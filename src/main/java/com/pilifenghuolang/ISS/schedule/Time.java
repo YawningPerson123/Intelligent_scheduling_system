@@ -1,6 +1,14 @@
 package com.pilifenghuolang.ISS.schedule;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("preference")
 public class Time {
+    //数据库中用来查询的数据
+    private Integer id;
+    private Integer stuff_id;
+    private Integer type;
+
     private Integer startTime;
     private Integer endTime;
     private String dayOfTheWeek;//周几,为了构造函数和timeNum区分而选用String
@@ -12,6 +20,18 @@ public class Time {
         this.endTime = endTime;
         this.dayOfTheWeek = dayOfTheWeek;
         this.timeNum = timeNum;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Integer getStuff_id() {
+        return stuff_id;
+    }
+
+    public Integer getType() {
+        return type;
     }
 
     public Integer getStartTime() {

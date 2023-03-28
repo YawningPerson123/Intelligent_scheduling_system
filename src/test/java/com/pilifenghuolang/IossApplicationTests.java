@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pilifenghuolang.ISS.dao.PassFlowDAO;
 import com.pilifenghuolang.ISS.dao.StoreDAO;
 import com.pilifenghuolang.ISS.dao.StuffDAO;
+import com.pilifenghuolang.ISS.dao.TimeDAO;
 import com.pilifenghuolang.ISS.domain.PassFlow;
 import com.pilifenghuolang.ISS.domain.Store;
 import com.pilifenghuolang.ISS.domain.Stuff;
@@ -25,6 +26,8 @@ class IossApplicationTests {
     private StuffDAO stuffDAO;
     @Autowired
     private PassFlowDAO passFlowDAO;
+    @Autowired
+    private TimeDAO timeDAO;
 
     @Test
     void contextLoads() {
@@ -40,13 +43,38 @@ class IossApplicationTests {
     void testMain(){
         // 创建商店实体类
         Store store = storeDAO.selectById(1);
-        // 为商店添加员工
+        // 读取员工，并为员工设置偏好
         LambdaQueryWrapper<Stuff> lqw1 = new LambdaQueryWrapper<>();
         lqw1.eq(Stuff::getStores,1);
+        List<Stuff> stuffList = stuffDAO.selectList(lqw1);
+        for (Stuff stuff:stuffList) {
+            LambdaQueryWrapper<Time> lqw2 = new LambdaQueryWrapper<>();
+            lqw2.eq(Time::getStuff_id,stuff.getId()).lt(Time::getType,2);
+            List<Time> timeList = timeDAO.selectList(lqw2);
+
+            ArrayList<Time> weekOfDayPreference = new ArrayList<>();
+            ArrayList<Time> periodPreference = new ArrayList<>();
+            for (Time time:timeList) {
+                switch(time.getType()){
+                    case 0:
+                        weekOfDayPreference.add(time);
+                        break;
+                    case 1 :
+                        periodPreference.add(time);
+                        break;
+                }
+            }
+            LinkedHashMap<Integer, ArrayList<Time>> preferenceMap = new LinkedHashMap<>();
+            preferenceMap.put(0,weekOfDayPreference);
+            preferenceMap.put(1,periodPreference);
+            stuff.setPreferenceMap(preferenceMap);
+        }
+        System.out.println(stuffList);
+        // 为商店添加员工
         store.setStuffArr((ArrayList<Stuff>) stuffDAO.selectList(lqw1));
         //获取客流量数据
-        LambdaQueryWrapper<PassFlow> lqw2 = new LambdaQueryWrapper<>();
-        List<PassFlow> passFlowList = passFlowDAO.selectList(lqw2);
+        LambdaQueryWrapper<PassFlow> lqw3 = new LambdaQueryWrapper<>();
+        List<PassFlow> passFlowList = passFlowDAO.selectList(lqw3);
         LinkedHashMap<String, ArrayList<Double>> passFlowNumWeekMap = new LinkedHashMap<>();
         for (PassFlow passflow:passFlowList) {
             ArrayList<Double> list = new ArrayList<>();
@@ -62,6 +90,7 @@ class IossApplicationTests {
             System.out.print("周" + dayOfTheWeek + "：");
             System.out.println(timeStuffWeekMap.get(dayOfTheWeek));
         }
+
     }
 
 }
