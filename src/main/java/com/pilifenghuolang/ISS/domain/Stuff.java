@@ -37,7 +37,44 @@ public class Stuff {
         personalWorkingHours.put(1,0);//周工作时间设置为0
     }
 
-    public void setWorkingTimeUpperLimit(Integer dayWorkingTimeUpperLimit,Integer weekWorkingTimeUpperLimit){
+    public Stuff(String name, String position, String telephone, String mail, String stores) {
+        this.name = name;
+        this.position = position;
+        this.telephone = telephone;
+        this.mail = mail;
+        this.stores = stores;
+
+        personalWorkingHours.put(0,0);//日工作时间设置为0
+        personalWorkingHours.put(1,0);//周工作时间设置为0
+    }
+
+    public Stuff(Integer id, String name, String position, String telephone, String mail, String stores) {
+        this.id = id;
+        this.name = name;
+        this.position = position;
+        this.telephone = telephone;
+        this.mail = mail;
+        this.stores = stores;
+
+        personalWorkingHours.put(0,0);//日工作时间设置为0
+        personalWorkingHours.put(1,0);//周工作时间设置为0
+    }
+
+    public Stuff(Integer id, String name, String position, String telephone, String mail, String stores, Integer dayWorkingTimeUpperLimit, Integer weekWorkingTimeUpperLimit) {
+        this.id = id;
+        this.name = name;
+        this.position = position;
+        this.telephone = telephone;
+        this.mail = mail;
+        this.stores = stores;
+        this.dayWorkingTimeUpperLimit = dayWorkingTimeUpperLimit;
+        this.weekWorkingTimeUpperLimit = weekWorkingTimeUpperLimit;
+
+        personalWorkingHours.put(0,0);//日工作时间设置为0
+        personalWorkingHours.put(1,0);//周工作时间设置为0
+    }
+
+    public void setWorkingTimeUpperLimit(Integer dayWorkingTimeUpperLimit, Integer weekWorkingTimeUpperLimit){
         this.dayWorkingTimeUpperLimit=dayWorkingTimeUpperLimit;
         this.weekWorkingTimeUpperLimit=weekWorkingTimeUpperLimit;
     }
