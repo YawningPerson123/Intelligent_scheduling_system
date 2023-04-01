@@ -1,10 +1,10 @@
 package com.pilifenghuolang;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.pilifenghuolang.ISS.dao.PassFlowDAO;
-import com.pilifenghuolang.ISS.dao.StoreDAO;
-import com.pilifenghuolang.ISS.dao.StuffDAO;
-import com.pilifenghuolang.ISS.dao.TimeDAO;
+import com.pilifenghuolang.ISS.dao.PassFlowDao;
+import com.pilifenghuolang.ISS.dao.StoreDao;
+import com.pilifenghuolang.ISS.dao.StuffDao;
+import com.pilifenghuolang.ISS.dao.TimeDao;
 import com.pilifenghuolang.ISS.domain.PassFlow;
 import com.pilifenghuolang.ISS.domain.Store;
 import com.pilifenghuolang.ISS.domain.Stuff;
@@ -21,13 +21,13 @@ import java.util.List;
 class IossApplicationTests {
 
     @Autowired
-    private StoreDAO storeDAO;
+    private StoreDao storeDAO;
     @Autowired
-    private StuffDAO stuffDAO;
+    private StuffDao stuffDAO;
     @Autowired
-    private PassFlowDAO passFlowDAO;
+    private PassFlowDao passFlowDAO;
     @Autowired
-    private TimeDAO timeDAO;
+    private TimeDao timeDAO;
 
     @Test
     void contextLoads() {

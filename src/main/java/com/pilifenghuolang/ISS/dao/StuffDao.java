@@ -5,5 +5,5 @@ import com.pilifenghuolang.ISS.domain.Stuff;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface StuffDAO extends BaseMapper<Stuff> {
+public interface StuffDao extends BaseMapper<Stuff> {
 }
