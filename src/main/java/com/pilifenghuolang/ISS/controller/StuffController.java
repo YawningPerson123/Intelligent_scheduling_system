@@ -2,13 +2,9 @@ package com.pilifenghuolang.ISS.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.pilifenghuolang.ISS.domain.Stuff;
-import com.pilifenghuolang.ISS.service.StuffService;
 import com.pilifenghuolang.ISS.service.impl.StuffServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/stuffs")
@@ -65,4 +61,8 @@ public class StuffController {
     }
 
 
+//    @PostMapping()
+//    public void test(@RequestBody Student student){
+//        System.out.println(student);
+//    }
 }

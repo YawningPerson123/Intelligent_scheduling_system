@@ -18,9 +18,15 @@ public class StuffServiceTestCase {
         System.out.println(stuffService.getById(1));
     }
 
+    //@Test
+//    void testSave(){
+//        Stuff stuff=new Stuff(25,"haha","1","1","1","1");
+//        System.out.println(stuffService.save(stuff));
+//    }
+
     @Test
-    void testSave(){
-        Stuff stuff=new Stuff(25,"haha","1","1","1","1");
-        System.out.println(stuffService.save(stuff));
+    void testDelete(){
+        System.out.println(stuffService.delete(25));
+
     }
 }

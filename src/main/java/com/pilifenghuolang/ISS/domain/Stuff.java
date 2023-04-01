@@ -5,6 +5,7 @@ import com.pilifenghuolang.ISS.schedule.Time;
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 @Data
@@ -26,38 +27,12 @@ public class Stuff {
     private ArrayList<Time> personalSchedule=new ArrayList<>();//用于存放个人的排班时间段
     //private ArrayList<Integer> personalWorkingHours=new ArrayList<>();//0代表日工作时间，1代表周工作时间
     @TableField(exist = false)
-    private LinkedHashMap<Integer,Integer> personalWorkingHours=new LinkedHashMap<>();//0代表日工作时间，1代表周工作时间
+    private LinkedHashMap<Integer,Integer> personalWorkingHours=new LinkedHashMap<Integer,Integer>(){{put(0,0);put(1,0);}};//0代表日工作时间，1代表周工作时间
     @TableField(exist = false)
     private ArrayList<Time> personalRestTime=new ArrayList<>();//用于存放休息的时间段
 
     public Stuff(String name) {
         this.name=name;
-
-        personalWorkingHours.put(0,0);//日工作时间设置为0
-        personalWorkingHours.put(1,0);//周工作时间设置为0
-    }
-
-    public Stuff(String name, String position, String telephone, String mail, String stores) {
-        this.name = name;
-        this.position = position;
-        this.telephone = telephone;
-        this.mail = mail;
-        this.stores = stores;
-
-        personalWorkingHours.put(0,0);//日工作时间设置为0
-        personalWorkingHours.put(1,0);//周工作时间设置为0
-    }
-
-    public Stuff(Integer id, String name, String position, String telephone, String mail, String stores) {
-        this.id = id;
-        this.name = name;
-        this.position = position;
-        this.telephone = telephone;
-        this.mail = mail;
-        this.stores = stores;
-
-        personalWorkingHours.put(0,0);//日工作时间设置为0
-        personalWorkingHours.put(1,0);//周工作时间设置为0
     }
 
     public Stuff(Integer id, String name, String position, String telephone, String mail, String stores, Integer dayWorkingTimeUpperLimit, Integer weekWorkingTimeUpperLimit) {
@@ -69,9 +44,6 @@ public class Stuff {
         this.stores = stores;
         this.dayWorkingTimeUpperLimit = dayWorkingTimeUpperLimit;
         this.weekWorkingTimeUpperLimit = weekWorkingTimeUpperLimit;
-
-        personalWorkingHours.put(0,0);//日工作时间设置为0
-        personalWorkingHours.put(1,0);//周工作时间设置为0
     }
 
     public void setWorkingTimeUpperLimit(Integer dayWorkingTimeUpperLimit, Integer weekWorkingTimeUpperLimit){

@@ -1,5 +1,6 @@
 package com.pilifenghuolang.Controller;
 
+import com.pilifenghuolang.ISS.domain.Stuff;
 import com.pilifenghuolang.ISS.service.StuffService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ public class StuffControllerTestCase {
 
     @Test
     void test(){
-        System.out.println(stuffService.getByName("",0,20));
+
+        Stuff stuff=new Stuff(10018,"1","1","1","1","1",1,1);
+        stuffService.save(stuff);
+
     }
 
 }
