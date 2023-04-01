@@ -8,9 +8,11 @@ import java.util.Date;
 @Data
 public class PassFlow{
     /** 主键 */
-    private Integer id ;
-    /** 星期 */
+    private Integer weekId ;
+    /** 星期几 */
     private Integer dayOfWeek ;
+    /** 具体日期*/
+    private Date date;
     /** 客流量1 */
     private Double passFlow1 ;
     /** 客流量2 */
