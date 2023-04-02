@@ -50,8 +50,8 @@ public class StuffController {
         return result;
     }
 
-    @GetMapping("/basic/name/{name}/currentPage/{currentPage}/pageSize/{pageSize}")
-    public Result getByName(@PathVariable String name, @PathVariable int currentPage, @PathVariable int pageSize){
+    @GetMapping(value = {"/basic/name/{currentPage}/{pageSize}","/basic/name/{name}/{currentPage}/{pageSize}"})
+    public Result getByName(@PathVariable(value="",required = false) String name, @PathVariable int currentPage, @PathVariable int pageSize){
 
         IPage<Stuff> stuffs=stuffService.getByName(name,currentPage,pageSize);
         int code= (!stuffs.equals(null)) ? Code.GET_OK :Code.GET_ERR;
