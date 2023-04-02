@@ -13,7 +13,7 @@ public class StuffController {
     @Autowired
     private StuffServiceImpl stuffService;
 
-    @PostMapping()
+    @PostMapping("/basic")
     public Result save(@RequestBody Stuff stuff){
 
         boolean flag=stuffService.save(stuff);
@@ -22,7 +22,7 @@ public class StuffController {
         return result;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/basic/{id}")
     public Result delete(@PathVariable int id){
 
         boolean flag=stuffService.delete(id);
@@ -31,7 +31,7 @@ public class StuffController {
         return result;
     }
 
-    @PutMapping()
+    @PutMapping("/basic")
     public Result update(@RequestBody Stuff stuff){
 
         boolean flag=stuffService.update(stuff);
@@ -40,7 +40,7 @@ public class StuffController {
         return result;
     }
 
-    @GetMapping("id/{id}")
+    @GetMapping("/basic/id/{id}")
     public Result getById(@PathVariable int id){
 
         Stuff stuff=stuffService.getById(id);
@@ -50,7 +50,7 @@ public class StuffController {
         return result;
     }
 
-    @GetMapping("/name/{name}/currentPage/{currentPage}/pageSize/{pageSize}")
+    @GetMapping("/basic/name/{name}/currentPage/{currentPage}/pageSize/{pageSize}")
     public Result getByName(@PathVariable String name, @PathVariable int currentPage, @PathVariable int pageSize){
 
         IPage<Stuff> stuffs=stuffService.getByName(name,currentPage,pageSize);
