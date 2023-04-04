@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/stuffs")
-public class StuffController {
+@RequestMapping("/stuffs/basic")
+public class StuffsBasicController {
 
     @Autowired
     private StuffServiceImpl stuffService;
 
-    @PostMapping("/basic")
+    @PostMapping()
     public Result save(@RequestBody Stuff stuff){
 
         boolean flag=stuffService.save(stuff);
@@ -22,7 +22,7 @@ public class StuffController {
         return result;
     }
 
-    @DeleteMapping("/basic/{id}")
+    @DeleteMapping("/{id}")
     public Result delete(@PathVariable int id){
 
         boolean flag=stuffService.delete(id);
@@ -31,7 +31,7 @@ public class StuffController {
         return result;
     }
 
-    @PutMapping("/basic")
+    @PutMapping()
     public Result update(@RequestBody Stuff stuff){
 
         boolean flag=stuffService.update(stuff);
@@ -40,7 +40,7 @@ public class StuffController {
         return result;
     }
 
-    @GetMapping("/basic/id/{id}")
+    @GetMapping("/id/{id}")
     public Result getById(@PathVariable int id){
 
         Stuff stuff=stuffService.getById(id);
@@ -50,7 +50,7 @@ public class StuffController {
         return result;
     }
 
-    @GetMapping(value = {"/basic/name/{currentPage}/{pageSize}","/basic/name/{name}/{currentPage}/{pageSize}"})
+    @GetMapping(value = {"/name/{currentPage}/{pageSize}","/name/{name}/{currentPage}/{pageSize}"})
     public Result getByName(@PathVariable(value="",required = false) String name, @PathVariable int currentPage, @PathVariable int pageSize){
 
         IPage<Stuff> stuffs=stuffService.getByName(name,currentPage,pageSize);

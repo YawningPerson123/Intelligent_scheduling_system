@@ -56,6 +56,14 @@ public class Time {
         return dayOfTheWeek;
     }
 
+    public void setStuff_id(Integer stuff_id) {
+        this.stuff_id = stuff_id;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public void setDayOfTheWeek(String dayOfTheWeek) {
         this.dayOfTheWeek = dayOfTheWeek;
     }

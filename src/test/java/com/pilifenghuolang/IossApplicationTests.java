@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.pilifenghuolang.ISS.dao.PassFlowDao;
 import com.pilifenghuolang.ISS.dao.StoreDao;
 import com.pilifenghuolang.ISS.dao.StuffDao;
-import com.pilifenghuolang.ISS.dao.TimeDao;
+import com.pilifenghuolang.ISS.dao.PreferenceDao;
 import com.pilifenghuolang.ISS.domain.PassFlow;
 import com.pilifenghuolang.ISS.domain.Store;
 import com.pilifenghuolang.ISS.domain.Stuff;
@@ -27,7 +27,7 @@ class IossApplicationTests {
     @Autowired
     private PassFlowDao passFlowDAO;
     @Autowired
-    private TimeDao timeDAO;
+    private PreferenceDao timeDAO;
 
     @Test
     void contextLoads() {
