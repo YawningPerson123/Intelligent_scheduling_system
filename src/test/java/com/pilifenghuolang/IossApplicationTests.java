@@ -49,7 +49,7 @@ class IossApplicationTests {
         List<Stuff> stuffList = stuffDAO.selectList(lqw1);
         for (Stuff stuff:stuffList) {
             LambdaQueryWrapper<Time> lqw2 = new LambdaQueryWrapper<>();
-            lqw2.eq(Time::getStuff_id,stuff.getId()).lt(Time::getType,2);
+            lqw2.eq(Time::getStuffId,stuff.getId()).lt(Time::getType,2);
             List<Time> timeList = timeDAO.selectList(lqw2);
 
             ArrayList<Time> weekOfDayPreference = new ArrayList<>();

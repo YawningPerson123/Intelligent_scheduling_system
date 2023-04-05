@@ -1,13 +1,16 @@
 package com.pilifenghuolang.ISS.schedule;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 @TableName("preference")
 public class Time {
     //数据库中用来查询的数据
+    @TableId(type= IdType.AUTO)
     private Integer id;
-    private Integer stuff_id;
+    private Integer stuffId;
     private Integer type;
 
     private Integer startTime;
@@ -28,8 +31,8 @@ public class Time {
         return id;
     }
 
-    public Integer getStuff_id() {
-        return stuff_id;
+    public Integer getStuffId() {
+        return stuffId;
     }
 
     public Integer getType() {
@@ -52,12 +55,16 @@ public class Time {
         this.endTime = endTime;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getDayOfTheWeek() {
         return dayOfTheWeek;
     }
 
-    public void setStuff_id(Integer stuff_id) {
-        this.stuff_id = stuff_id;
+    public void setStuffId(Integer stuffId) {
+        this.stuffId = stuffId;
     }
 
     public void setType(Integer type) {
@@ -96,6 +103,27 @@ public class Time {
         this.endTime = endTime;
         this.dayOfTheWeek = dayOfTheWeek;
     }
+
+    public Time(Integer stuffId, String dayOfTheWeek) {
+        this.stuffId = stuffId;
+        this.dayOfTheWeek = dayOfTheWeek;
+    }
+
+    public Time(Integer stuffId, Integer startTime, Integer endTime) {
+        this.stuffId = stuffId;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public Time(Integer id, Integer stuff_id, Integer type, Integer startTime, Integer endTime, String dayOfTheWeek) {
+        this.id = id;
+        this.stuffId = stuff_id;
+        this.type = type;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.dayOfTheWeek = dayOfTheWeek;
+    }
+
 
     //判断两个time的星期几是否相等
     public static boolean isDayOfTheWeekEqual(Time time1,Time time2){
@@ -166,7 +194,9 @@ public class Time {
     @Override
     public String toString() {
         return "Time{" +
-                "startTime=" + startTime +
+                "stuff_id=" + stuffId +
+                ", type=" + type +
+                ", startTime=" + startTime +
                 ", endTime=" + endTime +
                 ", dayOfTheWeek='" + dayOfTheWeek + '\'' +
                 '}';
