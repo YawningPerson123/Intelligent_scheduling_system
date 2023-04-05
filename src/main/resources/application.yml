@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    #数据库配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://nas.hiemalberyl.cn:3306/iss_db?useSSL=false&serverTimezone=UTC
+    username: root
+    password: qw1245aszx78[]123
+mybatis-plus:
+  configuration:
+    # 开启mp的日志（输出到控制台）
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    # 关闭mp的的控制台banner
+    banner: false

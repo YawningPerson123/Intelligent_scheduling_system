@@ -1,6 +1,6 @@
 package com.pilifenghuolang.ISS.schedule;
 
-import com.pilifenghuolang.ISS.Stuff;
+import com.pilifenghuolang.ISS.domain.Stuff;
 
 import java.util.*;
 

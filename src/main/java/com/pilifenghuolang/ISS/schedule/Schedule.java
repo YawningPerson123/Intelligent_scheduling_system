@@ -1,10 +1,9 @@
 package com.pilifenghuolang.ISS.schedule;
 
-import com.pilifenghuolang.ISS.Stuff;
+import com.pilifenghuolang.ISS.domain.Stuff;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class Schedule {
