@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 public class Time {
     //数据库中用来查询的数据
     private Integer id;
-    private Integer stuff_id;
+    private Integer stuffId;
     private Integer type;
 
     private Integer startTime;
@@ -29,7 +29,7 @@ public class Time {
     }
 
     public Integer getStuff_id() {
-        return stuff_id;
+        return stuffId;
     }
 
     public Integer getType() {
@@ -57,7 +57,7 @@ public class Time {
     }
 
     public void setStuff_id(Integer stuff_id) {
-        this.stuff_id = stuff_id;
+        this.stuffId = stuff_id;
     }
 
     public void setType(Integer type) {
