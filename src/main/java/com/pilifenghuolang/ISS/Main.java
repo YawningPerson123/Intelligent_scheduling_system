@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class Main {
-//    public static void main(String[] args) {
-//
+    public static void main(String[] args) {
+
 ////        Integer shopStart=7;
 ////        Integer[] assNeedArray={2, 1, 2, 4, 5, 6, 7, 5, 5, 4, 3, 2, 1, 1, 4};
 ////        ArrayList<Integer> assNeedArr=new ArrayList<Integer>();
@@ -63,16 +63,16 @@ public class Main {
 ////        time2=new Time(4,9);
 ////        System.out.println(Time.timeOverlapNum(time1,time2));
 //
-//        Store store=new Store();
-//        store.setStuffArr(CreateBasicData.createStuffArr());
-//        LinkedHashMap<String, ArrayList<Double>> passFlowNumWeekMap = CreateBasicData.passFlowNumWeekMap();
-//        System.out.println(passFlowNumWeekMap);
-//        LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(passFlowNumWeekMap);
-//        store.showStuffArrSchedule();
-//        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
-//            System.out.print("周" + dayOfTheWeek + "：");
-//            System.out.println(timeStuffWeekMap.get(dayOfTheWeek));
-//        }
+        Store store=new Store();
+        store.setStuffArr(CreateBasicData.createStuffArr());
+        LinkedHashMap<String, ArrayList<Double>> passFlowNumWeekMap = CreateBasicData.passFlowNumWeekMap();
+        System.out.println(passFlowNumWeekMap);
+        LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(passFlowNumWeekMap);
+        store.showStuffArrSchedule();
+        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
+            System.out.print("周" + dayOfTheWeek + "：");
+            System.out.println(timeStuffWeekMap.get(dayOfTheWeek));
+        }
 ////
 ////        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
 ////            System.out.println("zhou"+dayOfTheWeek);
@@ -99,9 +99,9 @@ public class Main {
 ////        for(String dayOfTheWeek:stuffNeedWeekArr.keySet()){
 ////            System.out.println(Schedule.schedulingStep1(dayOfTheWeek,store.getShopStartTime(dayOfTheWeek),stuffNeedWeekArr.get(dayOfTheWeek)));
 ////        }
-//
-//    }
-//
+
+    }
+
 
 
 }

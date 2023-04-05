@@ -71,7 +71,10 @@ class IossApplicationTests {
         }
         System.out.println(stuffList);
         // 为商店添加员工
-        store.setStuffArr((ArrayList<Stuff>) stuffDAO.selectList(lqw1));
+        // 警钟长鸣！！！！
+        // store.setStuffArr((ArrayList<Stuff>) stuffDAO.selectList(lqw1));
+
+        store.setStuffArr((ArrayList<Stuff>) stuffList);
         //获取客流量数据
         LambdaQueryWrapper<PassFlow> lqw3 = new LambdaQueryWrapper<>();
         List<PassFlow> passFlowList = passFlowDAO.selectList(lqw3);
@@ -83,6 +86,7 @@ class IossApplicationTests {
             }
             passFlowNumWeekMap.put(String.valueOf(passflow.getDayOfWeek()),list);
         }
+        System.out.println(passFlowNumWeekMap);
         //
         LinkedHashMap<String, LinkedHashMap<Time, Stuff>> timeStuffWeekMap = store.intelligentScheduling(passFlowNumWeekMap);
         store.showStuffArrSchedule();
