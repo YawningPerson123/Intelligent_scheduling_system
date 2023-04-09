@@ -2,21 +2,20 @@ package com.pilifenghuolang.ISS.controller;
 
 public class Result {
     private Object data;
-    private Integer code;
-    private String msg;
+    private Meta meta;
 
     public Result() {
     }
 
     public Result(Integer code,Object data) {
         this.data = data;
-        this.code = code;
+        this.meta.code = code;
     }
 
     public Result(Integer code, Object data, String msg) {
         this.data = data;
-        this.code = code;
-        this.msg = msg;
+        this.meta.code = code;
+        this.meta.msg = msg;
     }
 
     public Object getData() {
@@ -28,18 +27,18 @@ public class Result {
     }
 
     public Integer getCode() {
-        return code;
+        return meta.code;
     }
 
     public void setCode(Integer code) {
-        this.code = code;
+        this.meta.code = code;
     }
 
     public String getMsg() {
-        return msg;
+        return meta.msg;
     }
 
     public void setMsg(String msg) {
-        this.msg = msg;
+        this.meta.msg = msg;
     }
 }
