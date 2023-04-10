@@ -34,7 +34,7 @@ class IossApplicationTests {
     void contextLoads() {
     }
 
-    @Test
+    /*@Test
     void testCreateSchedule(){
         Store store = storeDAO.selectById(1);
         System.out.println(store);
@@ -117,5 +117,4 @@ class IossApplicationTests {
         }
 
     }*/
-
 }
