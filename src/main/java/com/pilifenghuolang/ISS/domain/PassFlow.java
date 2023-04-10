@@ -91,4 +91,33 @@ public class PassFlow{
         }
         return null;
     }
+
+    public void setPassFlow(int index,double num) {
+        switch (index){
+            case 1:setPassFlow1(num);break;
+            case 2:setPassFlow2(num);break;
+            case 3:setPassFlow3(num);break;
+            case 4:setPassFlow4(num);break;
+            case 5:setPassFlow5(num);break;
+            case 6:setPassFlow6(num);break;
+            case 7:setPassFlow7(num);break;
+            case 8:setPassFlow8(num);break;
+            case 9:setPassFlow9(num);break;
+            case 10:setPassFlow10(num);break;
+            case 11:setPassFlow11(num);break;
+            case 12:setPassFlow12(num);break;
+            case 13:setPassFlow13(num);break;
+            case 14:setPassFlow14(num);break;
+            case 15:setPassFlow15(num);break;
+            case 16:setPassFlow16(num);break;
+            case 17:setPassFlow17(num);break;
+            case 18:setPassFlow18(num);break;
+            case 19:setPassFlow19(num);break;
+            case 20:setPassFlow20(num);break;
+            case 21:setPassFlow21(num);break;
+            case 22:setPassFlow22(num);break;
+            case 23:setPassFlow23(num);break;
+            case 24:setPassFlow24(num);break;
+        }
+    }
 }

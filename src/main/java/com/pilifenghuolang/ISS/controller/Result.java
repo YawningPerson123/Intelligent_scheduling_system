@@ -2,7 +2,7 @@ package com.pilifenghuolang.ISS.controller;
 
 public class Result {
     private Object data;
-    private Meta meta;
+    private Meta meta = new Meta();
 
     public Result() {
     }

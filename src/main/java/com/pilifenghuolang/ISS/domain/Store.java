@@ -2,7 +2,7 @@ package com.pilifenghuolang.ISS.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.pilifenghuolang.ISS.schedule.Schedule;
+import com.pilifenghuolang.ISS.schedule.CreateSchedule;
 import com.pilifenghuolang.ISS.schedule.Time;
 
 import java.util.ArrayList;
@@ -157,13 +157,13 @@ public class Store {
         LinkedHashMap<String,ArrayList<Time>> scheduleWeekMap=new LinkedHashMap<>();
         for(String dayOfTheWeek : stuffNeedWeekMap.keySet()){
             Integer shopStartTime=this.getShopStartTime(dayOfTheWeek);
-            ArrayList<Time> scheduleArr= Schedule.schedulingStep1(dayOfTheWeek, shopStartTime,  stuffNeedWeekMap.get(dayOfTheWeek));
+            ArrayList<Time> scheduleArr= CreateSchedule.schedulingStep1(dayOfTheWeek, shopStartTime,  stuffNeedWeekMap.get(dayOfTheWeek));
             scheduleWeekMap.put(dayOfTheWeek,scheduleArr);
         }
 
         LinkedHashMap<String,LinkedHashMap<Time, Stuff>> timeStuffWeekMap=new LinkedHashMap<>();
         for(String dayOfTheWeek : scheduleWeekMap.keySet()){
-            LinkedHashMap<Time, Stuff> timeStuffMap=Schedule.schedulingStep2(scheduleWeekMap.get(dayOfTheWeek),this.stuffArr);
+            LinkedHashMap<Time, Stuff> timeStuffMap= CreateSchedule.schedulingStep2(scheduleWeekMap.get(dayOfTheWeek),this.stuffArr);
             timeStuffWeekMap.put(dayOfTheWeek,timeStuffMap);
             this.setStuffsDayWorkingHoursReturnToZero();
         }

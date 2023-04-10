@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
-public class Schedule {
+public class CreateSchedule {
 
 
     //传入开始时间+每小时人流量，返回一个排好的待填空的排班表

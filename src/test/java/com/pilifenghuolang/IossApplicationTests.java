@@ -1,11 +1,9 @@
 package com.pilifenghuolang;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.pilifenghuolang.ISS.dao.PassFlowDao;
-import com.pilifenghuolang.ISS.dao.StoreDao;
-import com.pilifenghuolang.ISS.dao.StuffDao;
-import com.pilifenghuolang.ISS.dao.PreferenceDao;
+import com.pilifenghuolang.ISS.dao.*;
 import com.pilifenghuolang.ISS.domain.PassFlow;
+import com.pilifenghuolang.ISS.domain.Schedule;
 import com.pilifenghuolang.ISS.domain.Store;
 import com.pilifenghuolang.ISS.domain.Stuff;
 import com.pilifenghuolang.ISS.schedule.Time;
@@ -14,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -28,6 +27,8 @@ class IossApplicationTests {
     private PassFlowDao passFlowDAO;
     @Autowired
     private PreferenceDao timeDAO;
+    @Autowired
+    private ScheduleDAO scheduleDAO;
 
     @Test
     void contextLoads() {
@@ -93,6 +94,26 @@ class IossApplicationTests {
         for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
             System.out.print("周" + dayOfTheWeek + "：");
             System.out.println(timeStuffWeekMap.get(dayOfTheWeek));
+        }
+        System.out.println(timeStuffWeekMap);
+        //将排班数据保存到数据库
+        for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
+            LinkedHashMap<Time, Stuff> map = timeStuffWeekMap.get(dayOfTheWeek);
+            Date date = new Date();
+            long longTime = date.getTime();
+            longTime += (long) (Integer.parseInt(dayOfTheWeek) - 1) * 24 * 60 * 60 * 1000;
+            date = new Date(longTime);
+            for (Time time : map.keySet()){
+                Schedule schedule = new Schedule();
+                schedule.setDayOfWeek(dayOfTheWeek);
+                schedule.setWeekId(1);
+                Stuff stuff = map.get(time);
+                schedule.setStuffId(stuff.getId());
+                schedule.setDate(date);
+                schedule.setStartTime(time.getStartTime());
+                schedule.setEndTime(time.getEndTime());
+                scheduleDAO.insert(schedule);
+            }
         }
 
     }
