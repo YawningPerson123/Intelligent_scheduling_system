@@ -93,6 +93,17 @@ public class Stuff {
         return flag;
     }
 
+    public boolean isWorkTime(Time time){
+        boolean flag=false;
+        for(Time workTime:personalSchedule) {
+            if (Time.isDayOfTheWeekEqual(time, workTime) && Time.timeOverlapNum(time, workTime) > 0) {
+                flag = true;
+            }
+        }
+        return flag;
+    }
+
+
 
     //输入time与preferenceMap的星期偏好和时间段偏好比较，获取preferenceValue的值
     public Integer getPreferenceValue(Time time){

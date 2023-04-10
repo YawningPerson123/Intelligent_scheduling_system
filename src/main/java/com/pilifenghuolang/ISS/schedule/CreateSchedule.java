@@ -76,7 +76,7 @@ public class CreateSchedule {
             for(Stuff stuff:stuffArr){
 
                 Integer preferenceValue;
-                if(stuff.isOverTime(time)||stuff.isRestTime(time)){
+                if(stuff.isOverTime(time)||stuff.isRestTime(time)||stuff.isWorkTime(time)){
                     preferenceValue=-1;
                 }else{
                     preferenceValue=stuff.getPreferenceValue(time);
