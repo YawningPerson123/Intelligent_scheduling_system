@@ -146,6 +146,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                 }
                 System.out.println(timeStuffWeekMap);
                 //将排班数据保存到数据库
+                String str = new String();
                 for(String dayOfTheWeek : timeStuffWeekMap.keySet()){
                     LinkedHashMap<Time, Stuff> map = timeStuffWeekMap.get(dayOfTheWeek);
                     Date date = new Date();
@@ -161,9 +162,14 @@ public class ScheduleServiceImpl implements ScheduleService {
                         schedule.setDate(date);
                         schedule.setStartTime(time.getStartTime());
                         schedule.setEndTime(time.getEndTime());
-                        scheduleDAO.insert(schedule);
+                        //scheduleDAO.insert(schedule);
+                        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        str = str + "("+schedule.getWeekId()+", "+schedule.getDayOfWeek()+", "+"\""+format.format(schedule.getDate())+"\""+", "+schedule.getStuffId()+", "+schedule.getStartTime()+", "+schedule.getEndTime()+")"+",";
                     }
                 }
+                str = str.substring(0, str.length() - 1);
+                str += ";";
+                scheduleDAO.InsertList(str);
             }
             return true;
         }
