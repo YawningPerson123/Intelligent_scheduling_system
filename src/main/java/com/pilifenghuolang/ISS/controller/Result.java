@@ -9,13 +9,13 @@ public class Result {
 
     public Result(Integer code,Object data) {
         this.data = data;
-        this.meta.code = code;
+        meta.setCode(code);
     }
 
     public Result(Integer code, Object data, String msg) {
         this.data = data;
-        this.meta.code = code;
-        this.meta.msg = msg;
+        meta.setCode(code);
+        meta.setMsg(msg);
     }
 
     public Object getData() {
@@ -26,19 +26,11 @@ public class Result {
         this.data = data;
     }
 
-    public Integer getCode() {
-        return meta.code;
+    public Meta getMeta() {
+        return meta;
     }
 
-    public void setCode(Integer code) {
-        this.meta.code = code;
-    }
-
-    public String getMsg() {
-        return meta.msg;
-    }
-
-    public void setMsg(String msg) {
-        this.meta.msg = msg;
+    public void setMeta(Meta meta) {
+        this.meta = meta;
     }
 }
