@@ -68,14 +68,14 @@ public class ScheduleController {
     @DeleteMapping("/deletePassFlow")
     public Result deletePassFlow(){
         boolean flag = scheduleService.deletePassFlow();
-        Result result = new Result(flag?Code.DELETE_OK :Code.DELETE_ERR, null, flag?"成功删除所有客流量数据":"操作失败");
+        Result result = new Result(Code.DELETE_OK, null, "成功删除所有客流量数据");
         return result;
     }
 
     @DeleteMapping("/deleteSchedule")
     public Result deleteSchedule(){
         boolean flag = scheduleService.deleteSchedule();
-        Result result = new Result(flag?Code.DELETE_OK :Code.DELETE_ERR, null, flag?"成功删除所有排班数据":"操作失败");
+        Result result = new Result(Code.DELETE_OK, null, "成功删除所有排班数据");
         return result;
     }
 }
