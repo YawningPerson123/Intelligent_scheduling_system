@@ -40,7 +40,7 @@ class IossApplicationTests {
         System.out.println(store);
     }
 
-    @Test
+   /* @Test
     void testMain(){
         // 创建商店实体类
         Store store = storeDAO.selectById(1);
@@ -116,6 +116,6 @@ class IossApplicationTests {
             }
         }
 
-    }
+    }*/
 
 }

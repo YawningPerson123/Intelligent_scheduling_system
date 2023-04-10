@@ -4,5 +4,7 @@ import com.pilifenghuolang.ISS.domain.User;
 
 public interface UserService {
 
-    public User login(int userId,String password);
+    public User login(String userId,String password);
+
+
 }

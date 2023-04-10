@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public User login(int userId, String password) {
+    public User login(String userId, String password) {
         LambdaQueryWrapper<User> lqw=new LambdaQueryWrapper<>();
         lqw.eq(User::getUserId,userId).eq(User::getPassword,password);
         return userDao.selectOne(lqw);
