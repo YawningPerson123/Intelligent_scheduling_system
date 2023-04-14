@@ -19,4 +19,6 @@ public class UserServiceImpl implements UserService {
         lqw.eq(User::getUserId,userId).eq(User::getPassword,password);
         return userDao.selectOne(lqw);
     }
+
+
 }

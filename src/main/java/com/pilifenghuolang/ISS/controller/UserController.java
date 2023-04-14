@@ -6,10 +6,7 @@ import com.pilifenghuolang.ISS.domain.User;
 import com.pilifenghuolang.ISS.service.TokenService;
 import com.pilifenghuolang.ISS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -23,7 +20,7 @@ public class UserController {
     @Autowired
     private TokenService tokenService;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Result login(@RequestBody User user){
         User loginUser=userService.login(user.getUserId(),user.getPassword());
         if(loginUser!=null){
@@ -34,4 +31,5 @@ public class UserController {
             return new Result(Code.GET_ERR,null,"登陆失败");
         }
     }
+
 }

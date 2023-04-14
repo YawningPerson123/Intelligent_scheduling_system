@@ -32,12 +32,15 @@ public class LoginFilter implements Filter {
         if(path.equals("/login")){
             chain.doFilter(request,response);
         }else{
+
             String token =request.getHeader("token");
             User user=tokenService.tokenConfirmation(token);
-            if(user!=null){
-                chain.doFilter(request,response);
+            if(user!=null) {
+                chain.doFilter(request, response);
             }
+
         }
+
 
 
     }
